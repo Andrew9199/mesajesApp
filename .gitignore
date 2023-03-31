@@ -1,0 +1,10 @@
+# Ignorar todos los archivos en src/main/
+src/main/*
+
+# Excepto los archivos .java en src/main/java/
+!src/main/java/*.java
+
+# Ignorar todas las demas carpetas
+
+.idea
+.target
