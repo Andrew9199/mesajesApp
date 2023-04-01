@@ -1,11 +1,12 @@
 package com.andrew.mensajesapp;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args){
-
-        //
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
 //Aqui crea que podemos entender que es un menu que hara x accion si se elije x valor en opcion
