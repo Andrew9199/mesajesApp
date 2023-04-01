@@ -22,7 +22,8 @@ public class MensajeServices {
         MensajeDAO.CrearMensajeDB(registro);
     }
     public static void listarMensajes(){
-
+        //12.4 Aqui solo debemos invocar el metodo mostrar mensaje recien creado
+        MensajeDAO.LeerMensajesDB();
     }
     public static void borrarMensajes(){
 

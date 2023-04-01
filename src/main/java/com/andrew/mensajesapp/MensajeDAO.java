@@ -2,6 +2,7 @@ package com.andrew.mensajesapp;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MensajeDAO {
@@ -39,7 +40,30 @@ dicha funcionalidad*/
     }
 
     public static void LeerMensajesDB(){
+        //12 Muy bien vamos a crear la logica para que DAO nos traiga los mensajes desde la base de datos
+        Conexion dbConnect = new Conexion();
 
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try(Connection conexion = dbConnect.get_conection()){
+            String query = "SELECT * FROM mensajes";
+            ps = conexion.prepareStatement(query);
+            //12.1 Este metodo solo ejecuta la consulta por lo que es distinta a el executeupdate();
+            rs = ps.executeQuery();
+            /*12.2 Aqui debemos imprimir los datos del mensaje cual variables segun su nombre de columna
+            y su respectivo metodo*/
+            while (rs.next()){
+                System.out.println("ID: " + rs.getInt("id"));
+                System.out.println("MENSAJE: " + rs.getString("mensaje"));
+                System.out.println("AUTOR: " + rs.getString("autor_mensaje"));
+                System.out.println("FECHA: " + rs.getString("fecha_mensaje"));
+                System.out.println("");
+            }
+        }catch (SQLException e){
+            System.out.println("No se pudieron recuperar los mensajes");
+            System.out.println(e);
+        }
     }
 
     public static void borrarMensajeDB(int id_mesaje){
