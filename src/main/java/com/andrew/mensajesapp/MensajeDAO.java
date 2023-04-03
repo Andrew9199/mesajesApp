@@ -67,10 +67,43 @@ dicha funcionalidad*/
     }
 
     public static void borrarMensajeDB(int id_mesaje){
+        Conexion dbConnect = new Conexion();
 
+        try(Connection conexion = dbConnect.get_conection()){
+            PreparedStatement ps = null;
+            try {
+                String query = "DELETE FROM mensajes WHERE id = ?";
+
+                ps = conexion.prepareStatement(query);
+                ps.setInt(1, id_mesaje);
+                ps.execute();
+                System.out.println("Mensaje eliminado con exito");
+
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        }catch (SQLException e){
+            System.out.println(e);
+        }
     }
 
     public static void actualizarMensajeDB(Mensaje mensaje){
-
+        Conexion dbConnect = new Conexion();
+        try (Connection conexion = dbConnect.get_conection()) {
+            PreparedStatement ps = null;
+            try{
+                String query = "UPDATE mensajes SET mensaje = ? WHERE mensajes.id = ?";
+                ps = conexion.prepareStatement(query);
+                ps.setString(1, mensaje.getMensaje());
+                ps.setInt(2, mensaje.getIdMensaje());
+                ps.executeUpdate();
+                System.out.println("Se edito el mensaje con exito");
+            }
+            catch (SQLException ex){
+                System.out.println(ex);
+            }
+        }catch (SQLException e){
+            System.out.println(e);
+        }
     }
 }

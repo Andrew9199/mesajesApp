@@ -26,9 +26,21 @@ public class MensajeServices {
         MensajeDAO.LeerMensajesDB();
     }
     public static void borrarMensajes(){
-
+        System.out.println("Escribe el id del comentario a eliminar");
+        Scanner sc = new Scanner(System.in);
+        int id_mesanje = sc.nextInt();
+        MensajeDAO.borrarMensajeDB(id_mesanje);
     }
     public static void editarMensaje(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Escribe el nuevo mensaje");
+        String mensaje =  sc.nextLine();
+        System.out.println("Cual es el id del mesensaje que quieras editar");
+        int id = sc.nextInt();
 
+        Mensaje actualizacion = new Mensaje();
+        actualizacion.setIdMensaje(id);
+        actualizacion.setMensaje(mensaje);
+        MensajeDAO.actualizarMensajeDB(actualizacion);
     }
 }
